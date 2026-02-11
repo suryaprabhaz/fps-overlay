@@ -1,0 +1,50 @@
+<Window x:Class="SuryaHUD.UI.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SuryaHUD Settings" Height="400" Width="350"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{StaticResource WindowBackground}"
+        Foreground="{StaticResource TextPrimary}">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="SURYA HUD" FontSize="24" FontWeight="Bold" Foreground="{StaticResource AccentColor}" HorizontalAlignment="Center"/>
+            <TextBlock Text="Made by @SuryaPrabhas" FontSize="12" Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <!-- Settings Form -->
+        <StackPanel Grid.Row="1">
+            <!-- Ping Host -->
+            <StackPanel Margin="0,0,0,15">
+                <TextBlock Text="Ping Host (IP or Domain)" Foreground="{StaticResource TextSecondary}" Margin="0,0,0,5"/>
+                <TextBox x:Name="TxtPingHost" Background="{StaticResource CardBackground}" Foreground="White" BorderThickness="0" Padding="10"/>
+            </StackPanel>
+
+            <!-- Target FPS -->
+            <StackPanel Margin="0,0,0,15">
+                <TextBlock Text="Target Overlay FPS" Foreground="{StaticResource TextSecondary}" Margin="0,0,0,5"/>
+                <TextBox x:Name="TxtTargetFps" Background="{StaticResource CardBackground}" Foreground="White" BorderThickness="0" Padding="10"/>
+            </StackPanel>
+            
+            <!-- Accent Color -->
+            <StackPanel>
+                 <TextBlock Text="Accent Color (Hex)" Foreground="{StaticResource TextSecondary}" Margin="0,0,0,5"/>
+                 <TextBox x:Name="TxtAccentColor" Background="{StaticResource CardBackground}" Foreground="White" BorderThickness="0" Padding="10"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Actions -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="RighT" Margin="0,20,0,0">
+             <Button Content="Save &amp; Apply" Click="BtnSave_Click" 
+                     Padding="20,10" Background="{StaticResource AccentColor}" Foreground="Black" FontWeight="Bold" BorderThickness="0"/>
+        </StackPanel>
+    </Grid>
+</Window>

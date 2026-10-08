@@ -13,15 +13,33 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Publish
-        run: dotnet publish SuryaHUD/SuryaHUD.csproj --configuration Release --runtime win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
-      - name: Create archive
+
+      - name: Publish self-contained Windows executable
+        run: >
+          dotnet publish SuryaHUD/SuryaHUD.csproj
+          --configuration Release
+          --runtime win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:DebugType=None
+          -p:DebugSymbols=false
+          -o publish
+
+      - name: Prepare release files
         shell: pwsh
-        run: Compress-Archive -Path publish/* -DestinationPath SuryaHUD-win-x64.zip
+        run: |
+          Copy-Item "publish/SuryaHUD.exe" "SuryaHUD-win-x64.exe"
+          Compress-Archive -Path publish/* -DestinationPath "SuryaHUD-win-x64.zip"
+
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: SuryaHUD-win-x64.zip
+          generate_release_notes: true
+          files: |
+            SuryaHUD-win-x64.exe
+            SuryaHUD-win-x64.zip

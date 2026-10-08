@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SuryaHUD.Win32
 {
-    internal sealed class HotkeyManager : IDisposable
+    public sealed class HotkeyManager : IDisposable
     {
         private readonly Dictionary<int, Action> _actions = new();
         private IntPtr _windowHandle;

@@ -1,91 +1,37 @@
-# 🎮 FPS Overlay (SuryaHUD)
+# SuryaHUD — FPS & System Overlay
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-lightgrey.svg)
-![.NET](https://img.shields.io/badge/.NET-8.0-purple.svg)
-![Status](https://img.shields.io/badge/status-stable-green.svg)
+A Windows desktop overlay focused on lightweight rendering, passive system monitoring and gaming-friendly presentation.
 
-**FPS Overlay** (formerly SuryaHUD) is a production-grade, high-performance system monitor designed specifically for gamers and power users. Unlike traditional overlays (like MSI Afterburner or Discord) that inject code into game processes—risking anti-cheat bans—this tool uses a **safe, passive monitoring approach**.
+## Why it is interesting
 
-It renders a lightweight, transparent layer over your screen to display:
-*   **System Frame Rate**: Measurements from the Desktop Window Manager (DWM).
-*   **Network Latency**: High-precision ICMP ping monitoring.
+Unlike process-injection overlays, SuryaHUD is designed around standard Windows APIs and a passive monitoring model. The project combines:
 
-> **🛡️ 100% Anti-Cheat Safe**: No DLL injection. No memory hooking. No risk.
+- C# / .NET 8
+- WPF settings UI
+- Win32 integration
+- Direct3D / Direct2D rendering
+- Real-time metric collection
+- Automated unit tests
+- Windows CI
 
----
+## Engineering goals
 
-## ✨ Key Features
+The important metric is not a marketing claim such as “sub-millisecond” or “<2% CPU”; it is **measured overhead on real hardware**. Releases should record CPU usage, memory usage, update rate and frame-time impact.
 
-*   **⚡ Ultra-Low Latency**: Built with **DirectX 11** and **Direct2D** for sub-millisecond rendering.
-*   **📉 Minimal Footprint**: Optimized `FramePacer` engine ensures **<2% CPU usage** even on older hardware.
-*   **🔒 Safety First**: Relies on standard Windows APIs (`Dwmapi.dll`, `IpHlpApi`) instead of invasive hooks.
-*   **🎨 Customizable UI**:
-    *   Dark Mode Settings Dashboard (WPF).
-    *   Changeable Accent Colors.
-    *   Adjustable Target FPS (30, 60, 144, etc.).
-*   **⌨️ Global Hotkeys**: Toggle visibility instantly with `Ctrl + Shift + O`.
-*   **🔌 System Tray Integration**: unobtrusive background operation.
+See [docs/architecture.md](docs/architecture.md) for the system design and [CONTRIBUTING.md](CONTRIBUTING.md) for development standards.
 
----
+## Build
 
-## 🚀 Installation
+Requires the .NET 8 SDK and Windows.
 
-### Option A: Download EXE
-1.  Go to the [**Releases**](https://github.com/suryaprabhaz/fps-overlay/releases) page.
-2.  Download the latest `SuryaHUD.exe`.
-3.  Run the application.
+```bash
+dotnet restore SuryaHUD.sln
+dotnet build SuryaHUD.sln --configuration Release
+dotnet test SuryaHUD.sln --configuration Release
+```
 
-### Option B: Build from Source
-If you prefer to compile it yourself:
+For a distributable build, use `publish.bat`.
 
-1.  **Prerequisites**: Install the [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0).
-2.  **Clone the Repo**:
-    ```bash
-    git clone https://github.com/suryaprabhaz/fps-overlay.git
-    cd fps-overlay
-    ```
-3.  **Build**:
-    Run the included build script:
-    ```cmd
-    publish.bat
-    ```
-4.  **Run**:
-    The output file will be in `Build/Release/SuryaHUD.exe`.
+## Author
 
----
-
-## ⚙️ Configuration
-
-1.  **Open Settings**: Right-click the **System Tray Icon** and select `Settings`.
-2.  **Ping Host**: Enter the IP or Domain you want to monitor (e.g., `8.8.8.8` for Google, `1.1.1.1` for Cloudflare).
-3.  **Target FPS**: Set the maximum refresh rate for the overlay (e.g., `60`). Lower values save battery on laptops.
-4.  **Accent Color**: customized the look with hex codes (e.g., `#FF4500`).
-
----
-
-## 🛠️ Tech Stack
-
-*   **Language**: C# (.NET 8.0)
-*   **Rendering**: Vortice.Windows (Direct3D 11, Direct2D1, DirectWrite)
-*   **UI**: WPF (Settings), Win32 API (Overlay Window)
-*   **Architecture**: Hybrid Multi-Threaded (Independent Render Thread + UI Thread)
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit pull requests, report issues, and request features.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 👨‍💻 Author
-
-**Surya Prabhas**
-*   GitHub: [@suryaprabhaz](https://github.com/suryaprabhaz)
-
-*Built with passion for high-performance gaming tools.*
+[@suryaprabhaz](https://github.com/suryaprabhaz)
